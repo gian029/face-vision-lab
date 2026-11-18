@@ -42,7 +42,7 @@ async def detect(file: UploadFile = File(...)) -> dict:
     height, width = image.shape[:2]
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     detections = face_detector.detectMultiScale(
-        gray_image, scaleFactor=1.1, minNeighbors=5, minSize=(60, 60)
+        gray_image, scaleFactor=1.05, minNeighbors=3, minSize=(45, 45)
     )
 
     faces = []

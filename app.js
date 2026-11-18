@@ -25,6 +25,10 @@ function drawResult(result) {
     context.fillStyle = '#c7e86b'; context.font = '12px DM Mono, monospace'; context.fillText(`${Math.round(face.confidence * 100)}%`, x + 7, y - 7);
     if (landmarksToggle.checked) { context.fillStyle = '#ff6b35'; face.landmarks.forEach((point) => { context.beginPath(); context.arc(point.x * scaleX, point.y * scaleY, 4, 0, Math.PI * 2); context.fill(); }); }
   });
+  if (!result.faces.length) {
+    context.fillStyle = '#c7e86b'; context.font = '14px DM Mono, monospace';
+    context.fillText('ROSTRO NO DETECTADO', 18, 30);
+  }
   document.querySelector('#faceCount').textContent = result.face_count;
   document.querySelector('#confidence').textContent = result.faces.length ? `${Math.round(result.faces.reduce((sum, face) => sum + face.confidence, 0) / result.faces.length * 100)}%` : '--';
   document.querySelector('#latency').textContent = `${result.processing_ms} ms`; document.querySelector('#resolution').textContent = `${result.width}x${result.height}`;
