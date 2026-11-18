@@ -3,5 +3,11 @@ services:
     name: face-vision-lab
     runtime: python
     plan: free
+    buildCommand: "pip install -r requirements.txt && python -m backend.download_model"
+    startCommand: "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"services:
+  - type: web
+    name: face-vision-lab
+    runtime: python
+    plan: free
     buildCommand: "mkdir -p frontend backend && mv index.html styles.css app.js frontend/ && mv main.py backend/ && touch backend/__init__.py && pip install -r requirements.txt"
     startCommand: "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
