@@ -46,7 +46,11 @@ async def detect(file: UploadFile = File(...)) -> dict:
     )
 
     faces = []
-    for x, y, box_width, box_height in detections:
+    for raw_x, raw_y, raw_width, raw_height in detections:
+        x = int(raw_x)
+        y = int(raw_y)
+        box_width = int(raw_width)
+        box_height = int(raw_height)
         confidence = 0.9
         landmarks = [
             {"x": x + round(box_width * 0.32), "y": y + round(box_height * 0.38)},
